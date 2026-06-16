@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="176dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="#071321"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:strokeColor="#FF9D00"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/imgProductoPromocion"
+            android:layout_width="110dp"
+            android:layout_height="104dp"
+            android:contentDescription="Imagen del producto en promoción"
+            android:scaleType="fitCenter"
+            android:src="@drawable/producto_botin_azul"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtDescuentoPromocion"
+            android:layout_width="52dp"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_btn_cantidad"
+            android:gravity="center"
+            android:text="-13%"
+            android:textColor="#FFB000"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtNombrePromocion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:maxLines="2"
+            android:text="Adidas Predator Elite FG"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/txtDescuentoPromocion"
+            app:layout_constraintStart_toEndOf="@id/imgProductoPromocion"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtCategoriaPromocion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Calzado deportivo"
+            android:textColor="#9FB0C2"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/txtNombrePromocion"
+            app:layout_constraintTop_toBottomOf="@id/txtNombrePromocion" />
+
+        <TextView
+            android:id="@+id/txtPrecioAnteriorPromocion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Antes: S/ 749.00"
+            android:textColor="#8B9AAF"
+            android:textSize="11sp"
+            app:layout_constraintStart_toStartOf="@id/txtNombrePromocion"
+            app:layout_constraintTop_toBottomOf="@id/txtCategoriaPromocion" />
+
+        <TextView
+            android:id="@+id/txtPrecioOfertaPromocion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="S/ 649.00"
+            android:textColor="#00AFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/txtNombrePromocion"
+            app:layout_constraintTop_toBottomOf="@id/txtPrecioAnteriorPromocion" />
+
+        <TextView
+            android:id="@+id/txtAhorroPromocion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Ahorras S/ 100.00"
+            android:textColor="#39FF66"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@id/txtPrecioOfertaPromocion"
+            app:layout_constraintStart_toEndOf="@id/txtPrecioOfertaPromocion" />
+
+        <TextView
+            android:id="@+id/txtVigenciaPromocion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Válido hasta: 30/06/2026"
+            android:textColor="#AFC0D3"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/txtNombrePromocion"
+            app:layout_constraintTop_toBottomOf="@id/txtPrecioOfertaPromocion" />
+
+        <TextView
+            android:id="@+id/btnVerPromocion"
+            android:layout_width="120dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_btn_continuar_pedido"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="VER OFERTA  →"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

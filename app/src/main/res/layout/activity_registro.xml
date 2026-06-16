@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainRegistro"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#05070A">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/bg_login"
+        android:scaleType="fitXY"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingStart="28dp"
+        android:paddingEnd="28dp"
+        app:layout_constraintWidth_percent="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.25">
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="76dp"
+            android:src="@drawable/logo_camerino_sports_header"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crear cuenta"
+            android:textColor="#FFFFFF"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Regístrate para comprar en Camerino Sports"
+            android:textColor="#D5DFEC"
+            android:textSize="17sp"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/edtNombre"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_input"
+            android:hint="Nombre"
+            android:paddingStart="22dp"
+            android:paddingEnd="22dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#A8B0BD"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/edtApellidos"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_input"
+            android:hint="Apellidos"
+            android:paddingStart="22dp"
+            android:paddingEnd="22dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#A8B0BD"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/edtEmailRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_input"
+            android:hint="Correo electrónico"
+            android:inputType="textEmailAddress"
+            android:paddingStart="22dp"
+            android:paddingEnd="22dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#A8B0BD"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/edtPasswordRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_input"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+            android:paddingStart="22dp"
+            android:paddingEnd="22dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#A8B0BD"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/btnCrearCuentaRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/bg_button_login"
+            android:gravity="center"
+            android:text="CREAR CUENTA"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

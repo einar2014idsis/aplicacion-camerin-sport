@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="#071321"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:strokeColor="#00AFFF"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
+
+        <!-- Imagen del producto -->
+        <ImageView
+            android:id="@+id/imgProductoPedido"
+            android:layout_width="96dp"
+            android:layout_height="88dp"
+            android:contentDescription="Imagen del producto"
+            android:scaleType="fitCenter"
+            android:src="@drawable/producto_botin_azul"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Botón eliminar -->
+        <ImageButton
+            android:id="@+id/btnEliminarPedido"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Eliminar producto"
+            android:padding="6dp"
+            android:src="@drawable/ic_delete_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Nombre -->
+        <TextView
+            android:id="@+id/txtNombreProductoPedido"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:maxLines="2"
+            android:text="Adidas Predator Elite FG"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/btnEliminarPedido"
+            app:layout_constraintStart_toEndOf="@id/imgProductoPedido"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Talla y color -->
+        <TextView
+            android:id="@+id/txtDetalleProductoPedido"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Talla: 42  |  Color: Azul/Negro"
+            android:textColor="#AFC0D3"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@id/txtNombreProductoPedido"
+            app:layout_constraintStart_toStartOf="@id/txtNombreProductoPedido"
+            app:layout_constraintTop_toBottomOf="@id/txtNombreProductoPedido" />
+
+        <!-- Disponibilidad -->
+        <TextView
+            android:id="@+id/txtDisponiblePedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="● Disponible"
+            android:textColor="#39FF66"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/txtNombreProductoPedido"
+            app:layout_constraintTop_toBottomOf="@id/txtDetalleProductoPedido" />
+
+        <!-- Selector de cantidad -->
+        <LinearLayout
+            android:id="@+id/contenedorCantidadPedido"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/txtNombreProductoPedido"
+            app:layout_constraintTop_toBottomOf="@id/txtDisponiblePedido">
+
+            <TextView
+                android:id="@+id/btnMenosPedido"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="@drawable/bg_btn_cantidad"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="−"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtCantidadPedido"
+                android:layout_width="38dp"
+                android:layout_height="34dp"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnMasPedido"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="@drawable/bg_btn_cantidad"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="#00AFFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Precio -->
+        <TextView
+            android:id="@+id/txtPrecioPedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="22dp"
+            android:text="S/ 649.00"
+            android:textColor="#00AFFF"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Texto precio unitario -->
+        <TextView
+            android:id="@+id/txtPrecioUnitarioPedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precio unitario"
+            android:textColor="#8294A8"
+            android:textSize="9sp"
+            app:layout_constraintEnd_toEndOf="@id/txtPrecioPedido"
+            app:layout_constraintTop_toBottomOf="@id/txtPrecioPedido" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
