@@ -8,34 +8,37 @@
         android:id="@+id/bgGestionProductos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@null"
         android:scaleType="centerCrop"
         android:src="@drawable/bg_admin_panel" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#99000000" />
+        android:background="#AA000000" />
 
     <LinearLayout
         android:id="@+id/headerGestionProductos"
         android:layout_width="0dp"
-        android:layout_height="76dp"
+        android:layout_height="74dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="22dp"
-        android:paddingEnd="22dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/btnVolverGestionProductos"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
             android:text="‹"
             android:textColor="#00AFFF"
-            android:textSize="36sp"
+            android:textSize="38sp"
             android:textStyle="bold" />
 
         <ImageView
@@ -51,33 +54,35 @@
             android:id="@+id/icBellGestionProductos"
             android:layout_width="28dp"
             android:layout_height="28dp"
+            android:contentDescription="Notificaciones"
             android:src="@drawable/ic_bell"
             app:tint="#00AFFF" />
-
     </LinearLayout>
 
     <ScrollView
         android:id="@+id/scrollGestionProductos"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:paddingStart="22dp"
-        android:paddingEnd="22dp"
-        android:paddingBottom="40dp"
+        android:fillViewport="true"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerGestionProductos">
 
         <LinearLayout
+            android:id="@+id/contenedorGestionProductos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="34dp">
 
             <TextView
                 android:id="@+id/txtTituloGestionProductos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Gestión de productos"
+                android:text="Gestion de productos"
                 android:textColor="#FFFFFF"
                 android:textSize="26sp"
                 android:textStyle="bold" />
@@ -87,271 +92,239 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Administra el catálogo de Camerino Sports"
+                android:text="Registra, actualiza y controla el catalogo"
                 android:textColor="#B8C7D9"
                 android:textSize="14sp" />
 
             <FrameLayout
                 android:id="@+id/bannerGestionProductos"
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="168dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/bg_card_admin_moderno">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:alpha="0.9"
+                    android:contentDescription="@null"
                     android:scaleType="centerCrop"
                     android:src="@drawable/img_admin_gestion_productos" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#88000000" />
+                    android:background="#77000000" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:gravity="start"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:paddingStart="18dp"
+                    android:paddingTop="14dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="14dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Catálogo deportivo"
+                        android:text="Catalogo deportivo"
                         android:textColor="#FFFFFF"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="230dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:text="Registra, actualiza y controla los productos disponibles."
+                        android:layout_marginTop="4dp"
+                        android:text="Agrega productos con foto, precio y stock."
                         android:textColor="#C8D3E0"
                         android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/btnNuevoProducto"
-                        android:layout_width="180dp"
-                        android:layout_height="38dp"
-                        android:layout_marginTop="14dp"
+                        android:layout_width="176dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="12dp"
                         android:background="@drawable/bg_btn_continuar_pedido"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:gravity="center"
                         android:text="+ AGREGAR PRODUCTO"
                         android:textColor="#FFFFFF"
                         android:textSize="12sp"
                         android:textStyle="bold" />
-
                 </LinearLayout>
-
             </FrameLayout>
-
-            <TextView
-                android:id="@+id/txtFormularioProducto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Formulario rápido"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/cardFormularioProducto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/fondo_resumen_pedido"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:visibility="gone">
 
                 <TextView
+                    android:id="@+id/txtFormularioProducto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nombre del producto"
-                    android:textColor="#B8C7D9"
-                    android:textSize="11sp"
+                    android:text="Formulario de producto"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/edtNombreProducto"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="6dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="12dp"
                     android:background="@drawable/bg_card_admin_moderno"
-                    android:hint="Ejemplo: Adidas Predator Elite FG"
+                    android:hint="Nombre del producto"
                     android:inputType="text"
+                    android:maxLength="100"
                     android:paddingStart="14dp"
                     android:paddingEnd="14dp"
                     android:textColor="#FFFFFF"
-                    android:textColorHint="#6F8194"
+                    android:textColorHint="#8294A8"
                     android:textSize="13sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <AutoCompleteTextView
+                        android:id="@+id/edtCategoriaProducto"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="7dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="6dp"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:background="@drawable/bg_card_admin_moderno"
+                        android:hint="Categoria"
+                        android:inputType="none"
+                        android:completionThreshold="0"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#8294A8"
+                        android:textSize="13sp" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Categoría"
-                            android:textColor="#B8C7D9"
-                            android:textSize="11sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/edtCategoriaProducto"
-                            android:layout_width="match_parent"
-                            android:layout_height="48dp"
-                            android:layout_marginTop="6dp"
-                            android:background="@drawable/bg_card_admin_moderno"
-                            android:hint="Calzado"
-                            android:inputType="text"
-                            android:paddingStart="14dp"
-                            android:paddingEnd="14dp"
-                            android:textColor="#FFFFFF"
-                            android:textColorHint="#6F8194"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <EditText
+                        android:id="@+id/edtTallaProducto"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="7dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="6dp"
                         android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Talla"
-                            android:textColor="#B8C7D9"
-                            android:textSize="11sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/edtTallaProducto"
-                            android:layout_width="match_parent"
-                            android:layout_height="48dp"
-                            android:layout_marginTop="6dp"
-                            android:background="@drawable/bg_card_admin_moderno"
-                            android:hint="42"
-                            android:inputType="text"
-                            android:paddingStart="14dp"
-                            android:paddingEnd="14dp"
-                            android:textColor="#FFFFFF"
-                            android:textColorHint="#6F8194"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-
+                        android:background="@drawable/bg_card_admin_moderno"
+                        android:hint="Talla"
+                        android:inputType="text"
+                        android:maxLength="30"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#8294A8"
+                        android:textSize="13sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <EditText
+                        android:id="@+id/edtColorProducto"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="7dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="6dp"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:background="@drawable/bg_card_admin_moderno"
+                        android:hint="Color"
+                        android:inputType="text"
+                        android:maxLength="50"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#8294A8"
+                        android:textSize="13sp" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Color"
-                            android:textColor="#B8C7D9"
-                            android:textSize="11sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/edtColorProducto"
-                            android:layout_width="match_parent"
-                            android:layout_height="48dp"
-                            android:layout_marginTop="6dp"
-                            android:background="@drawable/bg_card_admin_moderno"
-                            android:hint="Azul/Negro"
-                            android:inputType="text"
-                            android:paddingStart="14dp"
-                            android:paddingEnd="14dp"
-                            android:textColor="#FFFFFF"
-                            android:textColorHint="#6F8194"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <EditText
+                        android:id="@+id/edtPrecioProducto"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="7dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="6dp"
                         android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Precio"
-                            android:textColor="#B8C7D9"
-                            android:textSize="11sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/edtPrecioProducto"
-                            android:layout_width="match_parent"
-                            android:layout_height="48dp"
-                            android:layout_marginTop="6dp"
-                            android:background="@drawable/bg_card_admin_moderno"
-                            android:hint="649.00"
-                            android:inputType="numberDecimal"
-                            android:paddingStart="14dp"
-                            android:paddingEnd="14dp"
-                            android:textColor="#FFFFFF"
-                            android:textColorHint="#6F8194"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-
+                        android:background="@drawable/bg_card_admin_moderno"
+                        android:hint="Precio"
+                        android:inputType="numberDecimal"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#8294A8"
+                        android:textSize="13sp" />
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="Stock"
-                    android:textColor="#B8C7D9"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/edtStockProducto"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="6dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/bg_card_admin_moderno"
-                    android:hint="8"
+                    android:hint="Stock"
                     android:inputType="number"
                     android:paddingStart="14dp"
                     android:paddingEnd="14dp"
                     android:textColor="#FFFFFF"
-                    android:textColorHint="#6F8194"
+                    android:textColorHint="#8294A8"
                     android:textSize="13sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_height="82dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imgPreviewProducto"
+                        android:layout_width="82dp"
+                        android:layout_height="82dp"
+                        android:background="@drawable/bg_card_admin_moderno"
+                        android:clickable="true"
+                        android:contentDescription="Imagen del producto"
+                        android:focusable="true"
+                        android:padding="8dp"
+                        android:scaleType="fitCenter" />
+
+                    <EditText
+                        android:id="@+id/edtImagenProducto"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_card_admin_moderno"
+                        android:clickable="false"
+                        android:ellipsize="end"
+                        android:focusable="false"
+                        android:hint="Imagen seleccionada"
+                        android:maxLines="1"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#8294A8"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="14dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -361,6 +334,8 @@
                         android:layout_marginEnd="7dp"
                         android:layout_weight="1"
                         android:background="@drawable/bg_btn_continuar_pedido"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:gravity="center"
                         android:text="GUARDAR"
                         android:textColor="#FFFFFF"
@@ -374,289 +349,64 @@
                         android:layout_marginStart="7dp"
                         android:layout_weight="1"
                         android:background="@drawable/bg_card_admin_moderno"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:gravity="center"
                         android:text="LIMPIAR"
                         android:textColor="#00AFFF"
                         android:textSize="13sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-
             </LinearLayout>
 
             <TextView
                 android:id="@+id/txtListaProductosAdmin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:text="Productos registrados"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/itemProductoAdminUno"
+            <TextView
+                android:id="@+id/txtProductosVaciosAdmin"
                 android:layout_width="match_parent"
-                android:layout_height="118dp"
-                android:layout_marginTop="12dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/fondo_item_pedido"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="12dp">
-
-                <ImageView
-                    android:layout_width="88dp"
-                    android:layout_height="76dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/producto_botin_azul" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="12dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Adidas Predator Elite FG"
-                        android:textColor="#FFFFFF"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Talla: 42  |  Color: Azul/Negro"
-                        android:textColor="#B8C7D9"
-                        android:textSize="10sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Stock: 8 unidades"
-                        android:textColor="#39FF66"
-                        android:textSize="11sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="S/ 649.00"
-                        android:textColor="#00AFFF"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="48dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="42dp"
-                        android:layout_height="34dp"
-                        android:background="@drawable/bg_btn_cantidad"
-                        android:gravity="center"
-                        android:text="✎"
-                        android:textColor="#00AFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="42dp"
-                        android:layout_height="34dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_btn_cantidad"
-                        android:gravity="center"
-                        android:text="🗑"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-            </LinearLayout>
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="No hay productos registrados"
+                android:textColor="#B8C7D9"
+                android:textSize="14sp"
+                android:visibility="gone" />
 
             <LinearLayout
-                android:id="@+id/itemProductoAdminDos"
+                android:id="@+id/contenedorProductosAdmin"
                 android:layout_width="match_parent"
-                android:layout_height="118dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/fondo_item_pedido"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="12dp">
-
-                <ImageView
-                    android:layout_width="88dp"
-                    android:layout_height="76dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/producto_botin_blanco" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="12dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Nike Mercurial Vapor 16"
-                        android:textColor="#FFFFFF"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Talla: 41  |  Color: Blanco"
-                        android:textColor="#B8C7D9"
-                        android:textSize="10sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Stock: 5 unidades"
-                        android:textColor="#39FF66"
-                        android:textSize="11sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="S/ 599.00"
-                        android:textColor="#00AFFF"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                    android:id="@+id/itemProductoAdminUno"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:visibility="gone" />
 
                 <LinearLayout
-                    android:layout_width="48dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:id="@+id/itemProductoAdminDos"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:visibility="gone" />
 
-                    <TextView
-                        android:layout_width="42dp"
-                        android:layout_height="34dp"
-                        android:background="@drawable/bg_btn_cantidad"
-                        android:gravity="center"
-                        android:text="✎"
-                        android:textColor="#00AFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="42dp"
-                        android:layout_height="34dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_btn_cantidad"
-                        android:gravity="center"
-                        android:text="🗑"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
+                <LinearLayout
+                    android:id="@+id/itemProductoAdminTres"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:visibility="gone" />
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/itemProductoAdminTres"
-                android:layout_width="match_parent"
-                android:layout_height="118dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="28dp"
-                android:background="@drawable/fondo_item_pedido"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="12dp">
-
-                <ImageView
-                    android:layout_width="88dp"
-                    android:layout_height="76dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/producto_botin_negro" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="12dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Botín Negro Pro"
-                        android:textColor="#FFFFFF"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Talla: 40  |  Color: Negro"
-                        android:textColor="#B8C7D9"
-                        android:textSize="10sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Stock: 3 unidades"
-                        android:textColor="#FFB000"
-                        android:textSize="11sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="S/ 459.00"
-                        android:textColor="#00AFFF"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="48dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="42dp"
-                        android:layout_height="34dp"
-                        android:background="@drawable/bg_btn_cantidad"
-                        android:gravity="center"
-                        android:text="✎"
-                        android:textColor="#00AFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="42dp"
-                        android:layout_height="34dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_btn_cantidad"
-                        android:gravity="center"
-                        android:text="🗑"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
         </LinearLayout>
-
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

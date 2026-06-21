@@ -9,11 +9,11 @@ public class Usuario {
     private String password;
     private String rol;
 
-    // constructor vacío
+    // constructor vacio
     public Usuario() {
     }
 
-    // constructor con parámetros
+    // constructor con parametros
     public Usuario(int id, String nombre, String apellidos,
                    String correo, String password, String rol) {
         this.id = id;
@@ -64,12 +64,12 @@ public class Usuario {
         this.correo = correo;
     }
 
-    // obtener contraseña
+    // obtener contrasena
     public String getPassword() {
         return password;
     }
 
-    // asignar contraseña
+    // asignar contrasena
     public void setPassword(String password) {
         this.password = password;
     }

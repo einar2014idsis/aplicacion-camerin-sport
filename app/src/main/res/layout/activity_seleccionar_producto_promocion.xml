@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/bgSeleccionarProductoPromocion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_admin_panel" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#AA000000" />
+
+    <LinearLayout
+        android:id="@+id/headerSeleccionarProductoPromocion"
+        android:layout_width="0dp"
+        android:layout_height="74dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/btnVolverSeleccionarProductoPromocion"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:gravity="center"
+            android:text="‹"
+            android:textColor="#00AFFF"
+            android:textSize="38sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/logoSeleccionarProductoPromocion"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:contentDescription="Logo Camerino Sports"
+            android:scaleType="centerInside"
+            android:src="@drawable/logo_camerino_sports_header" />
+
+        <ImageView
+            android:id="@+id/icSeleccionarProductoPromocion"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="Promocion"
+            android:src="@drawable/ic_tag" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollSeleccionarProductoPromocion"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="34dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerSeleccionarProductoPromocion">
+
+        <LinearLayout
+            android:id="@+id/contenedorSeleccionarProductoPromocion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtTituloSeleccionarProductoPromocion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Seleccionar producto"
+                android:textColor="#FFFFFF"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtSubtituloSeleccionarProductoPromocion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Elige el producto que tendra promocion."
+                android:textColor="#B8C7D9"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:id="@+id/cardBuscarProductoPromocion"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/fondo_buscador"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="Buscar"
+                    android:src="@drawable/ic_search" />
+
+                <EditText
+                    android:id="@+id/txtBuscarProductoPromocion"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:hint="Buscar por nombre o categoría"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8EA0B5"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtProductosDisponiblesPromocion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="Productos disponibles"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/contenedorProductosPromocion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/itemProductoPromocionEjemplo"
+                    android:layout_width="match_parent"
+                    android:layout_height="118dp"
+                    android:background="@drawable/fondo_item_pedido"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:id="@+id/imgProductoPromocionSeleccion"
+                        android:layout_width="88dp"
+                        android:layout_height="82dp"
+                        android:contentDescription="Producto"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/producto_botin_azul" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtProductoPromocionNombre"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="2"
+                            android:text="Adidas Predator Elite FG"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtProductoPromocionInfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Calzado | Stock: 8"
+                            android:textColor="#B8C7D9"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/txtProductoPromocionPrecio"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="S/ 649.00"
+                            android:textColor="#00AFFF"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/btnElegirProductoPromocion"
+                        android:layout_width="84dp"
+                        android:layout_height="38dp"
+                        android:background="@drawable/bg_btn_continuar_pedido"
+                        android:gravity="center"
+                        android:text="ELEGIR"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

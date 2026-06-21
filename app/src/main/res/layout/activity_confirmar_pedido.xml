@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/bgConfirmarPedido"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondo_principal_camerino_sports" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#AA000000" />
+
+    <LinearLayout
+        android:id="@+id/headerConfirmarPedido"
+        android:layout_width="0dp"
+        android:layout_height="74dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/btnVolverConfirmarPedido"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:gravity="center"
+            android:text="‹"
+            android:textColor="#FFFFFF"
+            android:textSize="38sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/logoConfirmarPedido"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:contentDescription="Logo Camerino Sports"
+            android:scaleType="centerInside"
+            android:src="@drawable/logo_camerino_sports_header" />
+
+        <ImageView
+            android:id="@+id/icConfirmarPedido"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="Pedido"
+            android:src="@drawable/ic_bag" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollConfirmarPedido"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingStart="22dp"
+        android:paddingEnd="22dp"
+        android:paddingBottom="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerConfirmarPedido">
+
+        <LinearLayout
+            android:id="@+id/contenedorConfirmarPedido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtTituloConfirmarPedido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Confirmar pedido"
+                android:textColor="#FFFFFF"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtSubtituloConfirmarPedido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Completa tus datos y selecciona la ubicacion de entrega."
+                android:textColor="#B8C7D9"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/cardDatosEntrega"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/fondo_resumen_pedido"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <EditText
+                    android:id="@+id/edtNombrePedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_card_admin_moderno"
+                    android:hint="Nombre completo"
+                    android:inputType="textPersonName"
+                    android:maxLength="150"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#6F8194"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/edtTelefonoPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_card_admin_moderno"
+                    android:hint="Telefono"
+                    android:inputType="phone"
+                    android:maxLength="9"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#6F8194"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/edtDireccionPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_card_admin_moderno"
+                    android:hint="Direccion"
+                    android:inputType="textPostalAddress"
+                    android:maxLength="200"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#6F8194"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/edtReferenciaPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_card_admin_moderno"
+                    android:gravity="top"
+                    android:hint="Referencia de entrega"
+                    android:inputType="textMultiLine"
+                    android:maxLength="250"
+                    android:padding="14dp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#6F8194"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cardUbicacionPedido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/fondo_resumen_pedido"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <FrameLayout
+                    android:id="@+id/previewUbicacionPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="145dp"
+                    android:background="@drawable/bg_mapa_preview"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="0dp">
+
+                    <com.google.android.gms.maps.MapView
+                        android:id="@+id/mapPreviewUbicacionPedido"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/txtPinUbicacionPedido"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_estado_camion_redondo"
+                        android:gravity="center"
+                        android:text="⌖"
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtAvisoPreviewMapaPedido"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#CC06111B"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:text="Configura la clave de Google Maps para ver el mapa real"
+                        android:textColor="#B8C7D9"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/txtPreviewUbicacionPedido"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Selecciona tu ubicacion en el mapa"
+                        android:textColor="#B8C7D9"
+                        android:textSize="12sp" />
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtEstadoUbicacionPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Ubicacion no seleccionada"
+                    android:textColor="#B8C7D9"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/btnSeleccionarUbicacionPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_card_admin_moderno"
+                    android:gravity="center"
+                    android:text="SELECCIONAR UBICACION"
+                    android:textColor="#00AFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cardResumenConfirmarPedido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/fondo_resumen_pedido"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/txtResumenConfirmarPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Resumen"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/contenedorResumenProductosPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical" />
+
+                <TextView
+                    android:id="@+id/txtTotalConfirmarPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="end"
+                    android:text="Total: S/ 0.00"
+                    android:textColor="#00AFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btnRegistrarPedido"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/bg_btn_continuar_pedido"
+                android:gravity="center"
+                android:text="CONTINUAR AL PAGO"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

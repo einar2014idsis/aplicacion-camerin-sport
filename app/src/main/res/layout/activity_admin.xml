@@ -130,6 +130,7 @@
                         android:textSize="9sp" />
 
                     <TextView
+                        android:id="@+id/txtTotalProductosAdmin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="24"
@@ -164,6 +165,7 @@
                         android:textSize="9sp" />
 
                     <TextView
+                        android:id="@+id/txtTotalPedidosAdmin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="8"
@@ -200,6 +202,7 @@
                         android:textSize="9sp" />
 
                     <TextView
+                        android:id="@+id/txtTotalStockBajoAdmin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="3"
@@ -235,6 +238,7 @@
                         android:textSize="9sp" />
 
                     <TextView
+                        android:id="@+id/txtTotalPromosAdmin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="5"
@@ -269,7 +273,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_card_admin_moderno">
+                    android:background="@drawable/bg_card_admin_moderno"
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -315,7 +321,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_card_admin_moderno">
+                    android:background="@drawable/bg_card_admin_moderno"
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -370,7 +378,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_card_admin_moderno">
+                    android:background="@drawable/bg_card_admin_moderno"
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -427,7 +437,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_card_admin_moderno">
+                    android:background="@drawable/bg_card_admin_moderno"
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -472,9 +484,12 @@
             <LinearLayout
                 android:id="@+id/cardActividadRecienteAdmin"
                 android:layout_width="match_parent"
-                android:layout_height="158dp"
+                android:layout_height="wrap_content"
+                android:minHeight="188dp"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/fondo_resumen_pedido"
+                android:clickable="true"
+                android:focusable="true"
                 android:orientation="vertical"
                 android:padding="16dp">
 
@@ -494,9 +509,12 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/btnVerActividadAdmin"
                         android:layout_width="70dp"
                         android:layout_height="28dp"
                         android:background="@drawable/bg_btn_cantidad"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:gravity="center"
                         android:text="Ver todo  →"
                         android:textColor="#00AFFF"
@@ -504,84 +522,101 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/txtActividadPedidoAdmin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="• Nuevo pedido #CS-001 recibido"
                     android:textColor="#C8D3E0"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:includeFontPadding="true" />
 
                 <TextView
+                    android:id="@+id/txtActividadStockAdmin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
+                    android:layout_marginTop="7dp"
                     android:text="• Stock bajo: Adidas Predator Elite FG"
                     android:textColor="#C8D3E0"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:includeFontPadding="true" />
 
                 <TextView
+                    android:id="@+id/txtActividadPromoAdmin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
+                    android:layout_marginTop="7dp"
                     android:text="• Promoción Verano 2026 activada"
                     android:textColor="#C8D3E0"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:includeFontPadding="true" />
 
                 <TextView
+                    android:id="@+id/txtActividadProductoAdmin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
+                    android:layout_marginTop="7dp"
                     android:text="• Producto Nike Mercurial Vapor 16 actualizado"
                     android:textColor="#C8D3E0"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:includeFontPadding="true" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/cardMetricasAdmin"
                 android:layout_width="match_parent"
-                android:layout_height="82dp"
+                android:layout_height="96dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/fondo_resumen_pedido"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="12dp">
 
                 <TextView
+                    android:id="@+id/txtClientesAdmin"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="Clientes\n156\n↑ 12%"
                     android:textColor="#FFFFFF"
-                    android:textSize="11sp" />
+                    android:textSize="12sp"
+                    android:lineSpacingExtra="2dp" />
 
                 <TextView
+                    android:id="@+id/txtVentasAdmin"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="Ventas\nS/ 8,450\n↑ 8%"
                     android:textColor="#FFFFFF"
-                    android:textSize="11sp" />
+                    android:textSize="12sp"
+                    android:lineSpacingExtra="2dp" />
 
                 <TextView
+                    android:id="@+id/txtIngresosAdmin"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="Ingresos\nS/ 7,230\n↑ 9%"
                     android:textColor="#FFFFFF"
-                    android:textSize="11sp" />
+                    android:textSize="12sp"
+                    android:lineSpacingExtra="2dp" />
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/btnCerrarSesionAdmin"
-                android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:layout_marginBottom="24dp"
+                android:layout_width="341dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="36dp"
                 android:background="@drawable/bg_btn_continuar_pedido"
                 android:gravity="center"
                 android:text="CERRAR SESIÓN"

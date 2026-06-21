@@ -2,6 +2,7 @@ package com.example.camerinosports;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.camerinosports.model.Usuario;
+import com.example.camerinosports.util.Validaciones;
 import com.example.camerinosports.viewmodel.UsuarioViewModel;
 
 public class RegistroActivity extends AppCompatActivity {
@@ -37,8 +39,13 @@ public class RegistroActivity extends AppCompatActivity {
         edtPasswordRegistro = findViewById(R.id.edtPasswordRegistro);
         btnCrearCuentaRegistro = findViewById(R.id.btnCrearCuentaRegistro);
 
-        // evento del botón crear cuenta
-        btnCrearCuentaRegistro.setOnClickListener(v -> crearCuenta());
+        // evento del boton crear cuenta
+        btnCrearCuentaRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                crearCuenta();
+            }
+        });
     }
 
     // registrar un nuevo usuario
@@ -55,10 +62,20 @@ public class RegistroActivity extends AppCompatActivity {
             edtNombre.requestFocus();
             return;
         }
+        if (!Validaciones.nombrePersona(nombre)) {
+            edtNombre.setError("Usa solo letras; mínimo 2 caracteres");
+            edtNombre.requestFocus();
+            return;
+        }
 
         // validar apellidos
         if (apellidos.isEmpty()) {
             edtApellidos.setError("Ingresa tus apellidos");
+            edtApellidos.requestFocus();
+            return;
+        }
+        if (!Validaciones.nombrePersona(apellidos)) {
+            edtApellidos.setError("Usa solo letras");
             edtApellidos.requestFocus();
             return;
         }
@@ -69,27 +86,24 @@ public class RegistroActivity extends AppCompatActivity {
             edtEmailRegistro.requestFocus();
             return;
         }
+        if (!Validaciones.correo(correo)) {
+            edtEmailRegistro.setError("Ejemplo: usuario@gmail.com");
+            edtEmailRegistro.requestFocus();
+            return;
+        }
 
-        // validar contraseña
+        // validar contrasena
         if (password.isEmpty()) {
             edtPasswordRegistro.setError("Ingresa tu contraseña");
             edtPasswordRegistro.requestFocus();
             return;
         }
-
-        // verificar si el correo ya existe
-        if (usuarioViewModel.existeCorreo(correo)) {
-
-            Toast.makeText(
-                    this,
-                    "Este correo ya está registrado",
-                    Toast.LENGTH_SHORT
-            ).show();
-
+        if (!Validaciones.password(password)) {
+            edtPasswordRegistro.setError("Mínimo 6 caracteres");
+            edtPasswordRegistro.requestFocus();
             return;
         }
-
-        // crear objeto usuario
+// crear objeto usuario
         Usuario usuario = new Usuario();
 
         usuario.setNombre(nombre);
@@ -97,34 +111,26 @@ public class RegistroActivity extends AppCompatActivity {
         usuario.setCorreo(correo);
         usuario.setPassword(password);
         usuario.setRol("cliente");
+        btnCrearCuentaRegistro.setEnabled(false);
+        btnCrearCuentaRegistro.setText("CREANDO...");
 
-        // registrar usuario
-        boolean registrado = usuarioViewModel.registrarUsuario(usuario);
+        usuarioViewModel.registrarUsuarioApi(usuario, new UsuarioViewModel.ResultadoUsuario() {
+            @Override
+            public void alCompletar(Usuario usuarioRegistrado) {
+                btnCrearCuentaRegistro.setEnabled(true);
+                btnCrearCuentaRegistro.setText("CREAR CUENTA");
+                Toast.makeText(RegistroActivity.this,
+                        "Cuenta creada correctamente", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(RegistroActivity.this, MainActivity.class));
+                finish();
+            }
 
-        if (registrado) {
-
-            Toast.makeText(
-                    this,
-                    "Cuenta creada correctamente",
-                    Toast.LENGTH_SHORT
-            ).show();
-
-            startActivity(
-                    new Intent(
-                            RegistroActivity.this,
-                            MainActivity.class
-                    )
-            );
-
-            finish();
-
-        } else {
-
-            Toast.makeText(
-                    this,
-                    "No se pudo crear la cuenta",
-                    Toast.LENGTH_SHORT
-            ).show();
-        }
+            @Override
+            public void alFallar(String mensaje) {
+                btnCrearCuentaRegistro.setEnabled(true);
+                btnCrearCuentaRegistro.setText("CREAR CUENTA");
+                Toast.makeText(RegistroActivity.this, mensaje, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

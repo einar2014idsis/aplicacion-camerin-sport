@@ -99,7 +99,7 @@
                 android:layout_marginTop="8dp"
                 android:contentDescription="Imagen del producto"
                 android:scaleType="fitCenter"
-                android:src="@drawable/producto_botin_azul" />
+                android:src="@drawable/ic_tag" />
 
             <TextView
                 android:id="@+id/txtNombreDetalle"
@@ -160,6 +160,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/cardTallaDetalle"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
@@ -174,6 +175,7 @@
                         android:src="@drawable/icon_talla" />
 
                     <TextView
+                        android:id="@+id/txtEtiquetaTallaDetalle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"

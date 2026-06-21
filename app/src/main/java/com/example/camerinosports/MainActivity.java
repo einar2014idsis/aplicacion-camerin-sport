@@ -13,10 +13,14 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
+import androidx.core.view.OnApplyWindowInsetsListener;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.camerinosports.viewmodel.UsuarioViewModel;
+import com.example.camerinosports.model.Usuario;
+import com.example.camerinosports.model.UsuarioSesion;
+import com.example.camerinosports.util.Validaciones;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,10 +47,13 @@ public class MainActivity extends AppCompatActivity {
         usuarioViewModel = new UsuarioViewModel(this);
 
         // ajustar pantalla completa
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), new OnApplyWindowInsetsListener() {
+            @Override
+            public WindowInsetsCompat onApplyWindowInsets(View v, WindowInsetsCompat insets) {
+                Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+                return insets;
+            }
         });
 
         // enlazar controles
@@ -69,10 +76,12 @@ public class MainActivity extends AppCompatActivity {
         configurarCrearCuenta();
     }
 
-    // configurar inicio de sesión
+    // configurar inicio de sesion
     private void configurarBotonLogin() {
 
-        btnLogin.setOnClickListener(v -> {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             String correo = edtEmail.getText().toString().trim();
             String password = edtPassword.getText().toString().trim();
@@ -83,67 +92,72 @@ public class MainActivity extends AppCompatActivity {
                 edtEmail.requestFocus();
                 return;
             }
+            if (!Validaciones.correo(correo)) {
+                edtEmail.setError("Ingresa un correo válido");
+                edtEmail.requestFocus();
+                return;
+            }
 
-            // validar contraseña
+            // validar contrasena
             if (password.isEmpty()) {
                 edtPassword.setError("Ingresa tu contraseña");
                 edtPassword.requestFocus();
                 return;
             }
-
-            // validar credenciales desde el viewmodel
-            boolean loginCorrecto = usuarioViewModel.validarLogin(correo, password);
-
-            if (!loginCorrecto) {
-                Toast.makeText(
-                        MainActivity.this,
-                        "Correo o contraseña incorrectos",
-                        Toast.LENGTH_SHORT
-                ).show();
-
+            if (!Validaciones.password(password)) {
+                edtPassword.setError("Mínimo 6 caracteres");
+                edtPassword.requestFocus();
                 return;
             }
+            btnLogin.setEnabled(false);
+            btnLogin.setText("INGRESANDO...");
 
-            // obtener rol del usuario
-            String rol = usuarioViewModel.obtenerRol(correo);
+            usuarioViewModel.iniciarSesion(correo, password, new UsuarioViewModel.ResultadoUsuario() {
+                @Override
+                public void alCompletar(Usuario usuario) {
+                    btnLogin.setEnabled(true);
+                    btnLogin.setText("INICIAR SESIÓN");
+                    abrirPantallaUsuario(usuario);
+                }
 
-            // abrir panel administrador
-            if (rol.equals("admin")) {
-                Toast.makeText(
-                        MainActivity.this,
-                        "Bienvenido administrador",
-                        Toast.LENGTH_SHORT
-                ).show();
-
-                Intent intent = new Intent(MainActivity.this, AdminActivity.class);
-                startActivity(intent);
-                finish();
-
-                return;
+                @Override
+                public void alFallar(String mensaje) {
+                    btnLogin.setEnabled(true);
+                    btnLogin.setText("INICIAR SESIÓN");
+                    Toast.makeText(MainActivity.this, mensaje, Toast.LENGTH_SHORT).show();
+                }
+            });
             }
-
-            // abrir catálogo para cliente
-            Toast.makeText(
-                    MainActivity.this,
-                    "Bienvenido a Camerino Sports",
-                    Toast.LENGTH_SHORT
-            ).show();
-
-            Intent intent = new Intent(MainActivity.this, CatalogoActivity.class);
-            startActivity(intent);
-            finish();
         });
+    }
+
+    private void abrirPantallaUsuario(Usuario usuario) {
+        String rol = usuario.getRol();
+        UsuarioSesion.iniciarSesion(usuario.getCorreo(), rol);
+
+        if ("admin".equals(rol)) {
+            Toast.makeText(this, "Bienvenido administrador", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, AdminActivity.class));
+        } else {
+            Toast.makeText(this, "Bienvenido a Camerino Sports", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, CatalogoActivity.class));
+        }
+
+        finish();
     }
 
     // abrir pantalla de registro
     private void configurarCrearCuenta() {
-        txtCrearCuenta.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, RegistroActivity.class);
-            startActivity(intent);
+        txtCrearCuenta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RegistroActivity.class);
+                startActivity(intent);
+            }
         });
     }
 
-    // animación inicial de logo, zapatilla y plataforma
+    // animacion inicial de logo, zapatilla y plataforma
     private void animacionEntrada() {
         logoCamerino.setAlpha(0f);
         imgShoe.setAlpha(0f);
@@ -204,9 +218,11 @@ public class MainActivity extends AppCompatActivity {
         pulso.start();
     }
 
-    // animar botón de login al presionar
+    // animar boton de login al presionar
     private void animarBotonLogin() {
-        btnLogin.setOnTouchListener((v, event) -> {
+        btnLogin.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, android.view.MotionEvent event) {
 
             switch (event.getAction()) {
 
@@ -231,6 +247,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             return false;
+            }
         });
     }
 }

@@ -8,6 +8,7 @@
         android:id="@+id/bgPromociones"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@null"
         android:scaleType="centerCrop"
         android:src="@drawable/bg_consejos" />
 
@@ -28,13 +29,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/ic_menu"
-            app:tint="#00AFFF" />
+        <TextView
+            android:id="@+id/btnVolverPromociones"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="‹"
+            android:textColor="#00AFFF"
+            android:textSize="38sp"
+            android:textStyle="bold" />
 
         <ImageView
+            android:id="@+id/logoPromociones"
             android:layout_width="0dp"
             android:layout_height="38dp"
             android:layout_weight="1"
@@ -43,9 +51,11 @@
             android:src="@drawable/logo_camerino_sports_header" />
 
         <ImageView
+            android:id="@+id/icPromociones"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:src="@drawable/ic_bell"
+            android:contentDescription="Promociones"
+            android:src="@drawable/ic_offer"
             app:tint="#00AFFF" />
     </LinearLayout>
 
@@ -53,6 +63,7 @@
         android:id="@+id/scrollPromociones"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fillViewport="true"
         android:paddingStart="22dp"
         android:paddingEnd="22dp"
         android:paddingBottom="24dp"
@@ -62,11 +73,13 @@
         app:layout_constraintTop_toBottomOf="@id/headerPromociones">
 
         <LinearLayout
+            android:id="@+id/contenedorPromocionesUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/txtTituloPromociones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Promociones"
@@ -75,6 +88,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/txtSubtituloPromociones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -82,227 +96,25 @@
                 android:textColor="#B8C7D9"
                 android:textSize="14sp" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/txtPromocionesVacias"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
                 android:background="@drawable/fondo_item_pedido"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="14dp">
-
-                <ImageView
-                    android:layout_width="110dp"
-                    android:layout_height="90dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/producto_botin_azul" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="14dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Adidas Predator Elite FG"
-                        android:textColor="#FFFFFF"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Antes: S/ 749.00"
-                        android:textColor="#B8C7D9"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Ahora: S/ 649.00"
-                        android:textColor="#00AFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Ahorras S/ 100.00"
-                        android:textColor="#39FF66"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:text="Válido hasta: 30/06/2026"
-                        android:textColor="#B8C7D9"
-                        android:textSize="11sp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="46dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/bg_btn_cantidad"
-                    android:gravity="center"
-                    android:text="-13%"
-                    android:textColor="#00AFFF"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                android:gravity="center"
+                android:padding="18dp"
+                android:text="No hay promociones activas"
+                android:textColor="#B8C7D9"
+                android:textSize="14sp"
+                android:visibility="gone" />
 
             <LinearLayout
+                android:id="@+id/listaPromocionesUsuario"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginTop="14dp"
-                android:background="@drawable/fondo_item_pedido"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="14dp">
-
-                <ImageView
-                    android:layout_width="110dp"
-                    android:layout_height="90dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/producto_botin_blanco" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="14dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Nike Mercurial Vapor 16"
-                        android:textColor="#FFFFFF"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Antes: S/ 699.00"
-                        android:textColor="#B8C7D9"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Ahora: S/ 599.00"
-                        android:textColor="#00AFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Ahorras S/ 100.00"
-                        android:textColor="#39FF66"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:text="Válido hasta: 30/06/2026"
-                        android:textColor="#B8C7D9"
-                        android:textSize="11sp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="46dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/bg_btn_cantidad"
-                    android:gravity="center"
-                    android:text="-14%"
-                    android:textColor="#00AFFF"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginTop="14dp"
-                android:background="@drawable/fondo_item_pedido"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="14dp">
-
-                <ImageView
-                    android:layout_width="110dp"
-                    android:layout_height="90dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/producto_botin_negro" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="14dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Botín Negro Pro"
-                        android:textColor="#FFFFFF"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Antes: S/ 529.00"
-                        android:textColor="#B8C7D9"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Ahora: S/ 459.00"
-                        android:textColor="#00AFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Ahorras S/ 70.00"
-                        android:textColor="#39FF66"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:text="Válido hasta: 30/06/2026"
-                        android:textColor="#B8C7D9"
-                        android:textSize="11sp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="46dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/bg_btn_cantidad"
-                    android:gravity="center"
-                    android:text="-13%"
-                    android:textColor="#00AFFF"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:orientation="vertical" />
 
         </LinearLayout>
     </ScrollView>

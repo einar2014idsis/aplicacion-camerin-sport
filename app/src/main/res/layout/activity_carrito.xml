@@ -139,6 +139,13 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerCarrito"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:nestedScrollingEnabled="false" />
+
             <!-- Producto 1 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/itemPedido1"
@@ -424,17 +431,19 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/txtSubtotalCantidadPedido"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Subtotal (2 productos)"
+                        android:text="Subtotal (0 productos)"
                         android:textColor="#D5DFEC"
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/txtSubtotalPedido"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:text="S/ 1,248.00"
+                        android:text="S/ 0.00"
                         android:textColor="#D5DFEC"
                         android:textSize="13sp" />
 
@@ -456,7 +465,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:text="S/ 10.00"
+                        android:text="Gratis"
                         android:textColor="#D5DFEC"
                         android:textSize="13sp" />
 
@@ -569,17 +578,16 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Barra inferior -->
+    <!-- Menú inferior -->
     <LinearLayout
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="62dp"
         android:layout_gravity="bottom"
-        android:background="@drawable/fondo_bottom_nav_panel"
+        android:background="#0D1117"
+        android:elevation="10dp"
         android:orientation="horizontal"
-        android:gravity="center"
-        android:paddingStart="18dp"
-        android:paddingEnd="18dp">
+        android:gravity="center">
 
         <LinearLayout
             android:id="@+id/navInicio"
@@ -592,15 +600,16 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_nav_home"
-                android:scaleType="centerInside" />
+                android:src="@drawable/ic_home"
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Inicio"
-                android:textColor="#A8B0BD"
-                android:textSize="9sp" />
+                android:text="INICIO"
+                android:textColor="#5A6370"
+                android:textSize="9sp"
+                android:layout_marginTop="3dp" />
 
         </LinearLayout>
 
@@ -615,15 +624,16 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_nav_categories"
-                android:scaleType="centerInside" />
+                android:src="@drawable/ic_grid"
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Categorías"
-                android:textColor="#A8B0BD"
-                android:textSize="9sp" />
+                android:text="CATEGORÍAS"
+                android:textColor="#5A6370"
+                android:textSize="9sp"
+                android:layout_marginTop="3dp" />
 
         </LinearLayout>
 
@@ -643,10 +653,11 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_nav_cart_active"
-                    android:scaleType="centerInside" />
+                    android:src="@drawable/ic_cart"
+                    android:scaleType="fitCenter" />
 
                 <TextView
+                    android:id="@+id/badgeCarritoBottom"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_gravity="top|end"
@@ -662,10 +673,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Carrito"
+                android:text="CARRITO"
                 android:textColor="#007BFF"
                 android:textSize="9sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="3dp" />
 
         </LinearLayout>
 
@@ -680,15 +692,16 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_nav_profile"
-                android:scaleType="centerInside" />
+                android:src="@drawable/ic_profile"
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Perfil"
-                android:textColor="#A8B0BD"
-                android:textSize="9sp" />
+                android:text="PERFIL"
+                android:textColor="#5A6370"
+                android:textSize="9sp"
+                android:layout_marginTop="3dp" />
 
         </LinearLayout>
 

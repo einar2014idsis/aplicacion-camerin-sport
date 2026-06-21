@@ -151,7 +151,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pendientes"
+                        android:text="Confirmados"
                         android:textColor="#C4CFDA"
                         android:textSize="10sp" />
 
@@ -189,7 +189,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="En proceso"
+                        android:text="Preparando / camino"
                         android:textColor="#C4CFDA"
                         android:textSize="10sp" />
 
