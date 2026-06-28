@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.camerinosports.model.Pedido;
+import com.example.camerinosports.model.PedidoDetalle;
 import com.example.camerinosports.viewmodel.PedidoViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -83,7 +84,8 @@ public class SeguimientoPedidoActivity extends AppCompatActivity implements OnMa
         ponerTexto(R.id.txtEstadoPrincipalSeguimiento, pedido.getEstado());
         ponerTexto(R.id.txtFechaPedidoSeguimiento, pedido.getFecha());
         ponerTexto(R.id.txtDireccionSeguimiento, pedido.getDireccion());
-        ponerTexto(R.id.txtPagoSeguimiento, obtenerTextoPago());
+        ponerTexto(R.id.txtSubtituloSeguimiento, "Rastreo del paquete completo, no de productos separados.");
+        ponerTexto(R.id.txtPagoSeguimiento, obtenerTextoPago() + "\n" + crearResumenPaquete());
         marcarEstadoActual();
         pintarMapaSeguimiento();
     }
@@ -105,10 +107,11 @@ public class SeguimientoPedidoActivity extends AppCompatActivity implements OnMa
 
     private void marcarEstadoActual() {
         String estado = pedido.getEstado();
+        String resumenPaquete = crearResumenPaquete();
         // cada estado se convierte en un numero para activar los pasos anteriores
         int pasoActual = obtenerPasoActual(estado);
 
-        ponerTexto(R.id.txtDetalleConfirmado, "Tu pedido ha sido recibido correctamente.");
+        ponerTexto(R.id.txtDetalleConfirmado, "Tu paquete fue recibido correctamente: " + resumenPaquete + ".");
         ponerTexto(R.id.txtDetallePreparando, "Aun no hemos empezado la preparacion.");
         ponerTexto(R.id.txtDetalleCamino, "Aun no esta en camino.");
         ponerTexto(R.id.txtDetalleEntregado, "Tu pedido aun no ha sido entregado.");
@@ -128,18 +131,18 @@ public class SeguimientoPedidoActivity extends AppCompatActivity implements OnMa
             ponerTexto(R.id.txtEstadoPrincipalSeguimiento, "Pedido confirmado");
         } else if ("Preparando pedido".equals(estado)) {
             ponerTexto(R.id.txtEstadoPrincipalSeguimiento, "Preparando pedido");
-            ponerTexto(R.id.txtDetallePreparando, "Estamos preparando tu pedido.");
+            ponerTexto(R.id.txtDetallePreparando, "Estamos preparando todo el paquete.");
             ponerTexto(R.id.txtDetalleCamino, "Aun no esta en camino.");
         } else if ("En camino".equals(estado)) {
             ponerTexto(R.id.txtEstadoPrincipalSeguimiento, "En camino");
-            ponerTexto(R.id.txtDetallePreparando, "Tu pedido ya fue preparado.");
-            ponerTexto(R.id.txtDetalleCamino, "Tu pedido esta en camino.");
-            ponerTexto(R.id.txtDetalleEntregado, "Tu pedido aun no ha sido entregado.");
+            ponerTexto(R.id.txtDetallePreparando, "Tu paquete ya fue preparado.");
+            ponerTexto(R.id.txtDetalleCamino, "Tu paquete completo esta en camino.");
+            ponerTexto(R.id.txtDetalleEntregado, "Tu paquete aun no ha sido entregado.");
         } else if ("Entregado".equals(estado)) {
             ponerTexto(R.id.txtEstadoPrincipalSeguimiento, "Entregado");
-            ponerTexto(R.id.txtDetallePreparando, "Tu pedido ya fue preparado.");
+            ponerTexto(R.id.txtDetallePreparando, "Tu paquete ya fue preparado.");
             ponerTexto(R.id.txtDetalleCamino, "El repartidor llego al punto de entrega.");
-            ponerTexto(R.id.txtDetalleEntregado, "Tu pedido ya fue entregado.");
+            ponerTexto(R.id.txtDetalleEntregado, "Tu paquete completo ya fue entregado.");
         } else if ("Cancelado".equals(estado)) {
             ponerTexto(R.id.txtEstadoPrincipalSeguimiento, "Cancelado");
             ponerTexto(R.id.txtDetallePreparando, "El pedido fue cancelado.");
@@ -162,6 +165,22 @@ public class SeguimientoPedidoActivity extends AppCompatActivity implements OnMa
             return 1;
         }
         return 1;
+    }
+
+    private String crearResumenPaquete() {
+        if (pedido == null || pedido.getDetalles() == null || pedido.getDetalles().isEmpty()) {
+            return "paquete sin productos registrados";
+        }
+
+        int unidades = 0;
+        for (PedidoDetalle detalle : pedido.getDetalles()) {
+            unidades += detalle.getCantidad();
+        }
+
+        int lineas = pedido.getDetalles().size();
+        String productos = lineas == 1 ? "producto" : "productos";
+        String unidadesTexto = unidades == 1 ? "unidad" : "unidades";
+        return lineas + " " + productos + ", " + unidades + " " + unidadesTexto;
     }
 
     private void pintarPasoTexto(int id, boolean activo, boolean destacado) {

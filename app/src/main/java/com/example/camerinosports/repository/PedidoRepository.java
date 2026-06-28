@@ -84,6 +84,10 @@ public class PedidoRepository {
         });
     }
 
+    public void registrarPedidoCulqiServicio(Pedido pedido, final ResultadoPedido resultado) {
+        registrarPedidoServicio(pedido, resultado);
+    }
+
     public void listarPedidosServicio(String correo, final ResultadoLista resultado) {
         // sin correo se cargan todos los pedidos; con correo solo los del cliente
         Call<List<Pedido>> llamada = correo == null || correo.trim().isEmpty()

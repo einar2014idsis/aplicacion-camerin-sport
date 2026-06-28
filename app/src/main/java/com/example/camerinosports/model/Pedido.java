@@ -19,6 +19,7 @@ public class Pedido {
     private String metodoPago;
     private String estadoPago;
     private String codigoOperacionPago;
+    private String culqiToken;
     private ArrayList<PedidoDetalle> detalles;
 
     public Pedido() {
@@ -151,6 +152,14 @@ public class Pedido {
 
     public void setCodigoOperacionPago(String codigoOperacionPago) {
         this.codigoOperacionPago = codigoOperacionPago;
+    }
+
+    public String getCulqiToken() {
+        return culqiToken;
+    }
+
+    public void setCulqiToken(String culqiToken) {
+        this.culqiToken = culqiToken;
     }
 
     public ArrayList<PedidoDetalle> getDetalles() {

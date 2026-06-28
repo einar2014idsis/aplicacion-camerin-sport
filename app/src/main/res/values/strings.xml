@@ -1,5 +1,9 @@
 <resources>
-    <string name="api_base_url" translatable="false">http://127.0.0.1:5110/api/</string>
     <string name="app_name">Camerino Sports</string>
-    <string name="google_maps_key">AIzaSyAiohZHfyXkUn3DjxugSJM7pmwXfSW2S6I</string>
+
+    <string name="api_base_url" translatable="false">https://camerino-sports-api-einar.azurewebsites.net/</string>
+
+    <string name="google_maps_key" translatable="false">AIzaSyAiohZHfyXkUn3DjxugSJM7pmwXfSW2S6I</string>
+
+    <string name="culqi_public_key" translatable="false">pk_test_pago_simulado</string>
 </resources>

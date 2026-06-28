@@ -30,6 +30,9 @@ public interface PedidoApi {
     @POST("Pedidos")
     Call<Pedido> registrarPedido(@Body Pedido pedido);
 
+    @POST("Pedidos/culqi")
+    Call<Pedido> registrarPedidoCulqi(@Body Pedido pedido);
+
     @PUT("Pedidos/{id}/estado")
     Call<Void> cambiarEstado(@Path("id") int id, @Body EstadoPedidoRequest estado);
 

@@ -333,6 +333,7 @@
                     android:paddingLeft="18dp">
 
                     <TextView
+                        android:id="@+id/txtBannerEtiquetaCatalogo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="NUEVA COLECCIÓN"
@@ -341,6 +342,7 @@
                         android:letterSpacing="0.05" />
 
                     <TextView
+                        android:id="@+id/txtBannerTituloCatalogo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="VELOCIDAD\nSIN LÍMITES"
@@ -350,6 +352,7 @@
                         android:layout_marginTop="4dp" />
 
                     <TextView
+                        android:id="@+id/txtBannerDescripcionCatalogo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rendimiento extremo en cada desafío."
@@ -360,6 +363,7 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/imgBannerCatalogo"
                     android:layout_width="155dp"
                     android:layout_height="125dp"
                     android:layout_alignParentEnd="true"
@@ -381,24 +385,28 @@
                 android:gravity="center">
 
                 <View
+                    android:id="@+id/indicadorBannerUno"
                     android:layout_width="18dp"
                     android:layout_height="4dp"
                     android:background="#007BFF"
                     android:layout_marginRight="4dp" />
 
                 <View
+                    android:id="@+id/indicadorBannerDos"
                     android:layout_width="6dp"
                     android:layout_height="4dp"
                     android:background="#2A2F38"
                     android:layout_marginRight="4dp" />
 
                 <View
+                    android:id="@+id/indicadorBannerTres"
                     android:layout_width="6dp"
                     android:layout_height="4dp"
                     android:background="#2A2F38"
                     android:layout_marginRight="4dp" />
 
                 <View
+                    android:id="@+id/indicadorBannerCuatro"
                     android:layout_width="6dp"
                     android:layout_height="4dp"
                     android:background="#2A2F38" />

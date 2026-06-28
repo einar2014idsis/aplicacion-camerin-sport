@@ -70,6 +70,25 @@ public class PedidoViewModel {
         });
     }
 
+    public void registrarPedidoCulqiApi(Pedido pedido, final ResultadoPedido resultado) {
+        if (!pedidoValido(pedido)) {
+            resultado.alFallar("Revisa los datos del pedido");
+            return;
+        }
+
+        pedidoRepository.registrarPedidoCulqiServicio(pedido, new PedidoRepository.ResultadoPedido() {
+            @Override
+            public void alCompletar(Pedido pedido) {
+                resultado.alCompletar(pedido);
+            }
+
+            @Override
+            public void alFallar(String mensaje) {
+                resultado.alFallar(mensaje);
+            }
+        });
+    }
+
     public void listarPedidosApi(String correo, final ResultadoLista resultado) {
         pedidoRepository.listarPedidosServicio(correo, new PedidoRepository.ResultadoLista() {
             @Override
@@ -140,9 +159,24 @@ public class PedidoViewModel {
                 pedido.getDireccion().trim().length() >= 5 &&
                 pedido.getDetalles() != null &&
                 !pedido.getDetalles().isEmpty() &&
+                detallesValidos(pedido.getDetalles()) &&
                 pedido.getTotal() > 0 &&
                 !textoVacio(pedido.getMetodoPago()) &&
                 !textoVacio(pedido.getEstadoPago());
+    }
+
+    private boolean detallesValidos(ArrayList<PedidoDetalle> detalles) {
+        for (int i = 0; i < detalles.size(); i++) {
+            PedidoDetalle detalle = detalles.get(i);
+            if (detalle.getProductoId() < 0 ||
+                    detalle.getCantidad() <= 0 ||
+                    detalle.getPrecio() <= 0 ||
+                    detalle.getSubtotal() <= 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private PedidoRepository.ResultadoOperacion adaptar(final ResultadoOperacion resultado) {

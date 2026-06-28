@@ -160,7 +160,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Yape"
+                            android:text="Yape Empresa"
                             android:textColor="#FFFFFF"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -169,7 +169,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
-                            android:text="Celular y codigo de confirmacion simulado."
+                            android:text="Pago simulado con QR."
                             android:textColor="#B8C7D9"
                             android:textSize="12sp" />
 
@@ -262,7 +262,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Datos de Yape"
+                    android:text="Yape Empresa"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -271,9 +271,49 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Ingresa el celular afiliado y un codigo de 6 digitos para simular la confirmacion."
+                    android:text="Pago simulado. Ingresa un numero Yape y un codigo de 6 digitos para confirmar."
                     android:textColor="#B8C7D9"
                     android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgQrYapePedido"
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:background="#FFFFFF"
+                        android:contentDescription="QR Yape Camerino Sports"
+                        android:padding="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/qr_yape_einar"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="Confirmacion simulada"
+                        android:textColor="#00AFFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="No se realiza ningun cobro real"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/edtYapeTelefono"
@@ -281,14 +321,16 @@
                     android:layout_height="48dp"
                     android:layout_marginTop="14dp"
                     android:background="@drawable/bg_card_admin_moderno"
-                    android:hint="Celular afiliado a Yape"
+                    android:hint="Numero Yape del cliente"
+                    android:importantForAutofill="no"
                     android:inputType="phone"
                     android:maxLength="9"
                     android:paddingStart="14dp"
                     android:paddingEnd="14dp"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#6F8194"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    android:visibility="visible" />
 
                 <EditText
                     android:id="@+id/edtYapeCodigo"
@@ -296,14 +338,16 @@
                     android:layout_height="48dp"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/bg_card_admin_moderno"
-                    android:hint="Codigo de confirmacion"
-                    android:inputType="number"
+                    android:hint="Codigo de aprobacion Yape"
+                    android:importantForAutofill="no"
+                    android:inputType="numberPassword"
                     android:maxLength="6"
                     android:paddingStart="14dp"
                     android:paddingEnd="14dp"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#6F8194"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    android:visibility="visible" />
 
             </LinearLayout>
 
@@ -340,8 +384,9 @@
                     android:layout_marginTop="14dp"
                     android:background="@drawable/bg_card_admin_moderno"
                     android:hint="Numero de tarjeta"
+                    android:importantForAutofill="no"
                     android:inputType="phone"
-                    android:maxLength="19"
+                    android:maxLength="23"
                     android:paddingStart="14dp"
                     android:paddingEnd="14dp"
                     android:textColor="#FFFFFF"
@@ -362,6 +407,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/bg_card_admin_moderno"
                         android:hint="MM/AA"
+                        android:importantForAutofill="no"
                         android:inputType="text"
                         android:maxLength="5"
                         android:paddingStart="14dp"
@@ -378,6 +424,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/bg_card_admin_moderno"
                         android:hint="CVV"
+                        android:importantForAutofill="no"
                         android:inputType="numberPassword"
                         android:maxLength="3"
                         android:paddingStart="14dp"
@@ -395,6 +442,7 @@
                     android:layout_marginTop="12dp"
                     android:background="@drawable/bg_card_admin_moderno"
                     android:hint="Titular de la tarjeta"
+                    android:importantForAutofill="no"
                     android:inputType="textPersonName"
                     android:paddingStart="14dp"
                     android:paddingEnd="14dp"
@@ -409,7 +457,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:text="Pago simulado: no se realiza ningun cobro real. El pedido se guarda en SQLite para pruebas."
+                android:text="Confirma tu pago para registrar el pedido en el servidor."
                 android:textColor="#9FB0C2"
                 android:textSize="12sp" />
 

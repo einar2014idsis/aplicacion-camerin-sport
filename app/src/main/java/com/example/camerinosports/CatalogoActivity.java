@@ -3,10 +3,13 @@ package com.example.camerinosports;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +47,45 @@ public class CatalogoActivity extends AppCompatActivity {
     private View panelModoCategorias;
     private View bannerInicio;
     private View indicadoresBanner;
+    private TextView txtBannerEtiqueta;
+    private TextView txtBannerTitulo;
+    private TextView txtBannerDescripcion;
+    private ImageView imgBanner;
+    private View[] puntosBanner;
+    private int bannerActual;
+    private final Handler handlerBanner = new Handler(Looper.getMainLooper());
+    private final Runnable rotadorBanner = new Runnable() {
+        @Override
+        public void run() {
+            avanzarBanner();
+            handlerBanner.postDelayed(this, 3500);
+        }
+    };
+
+    private final String[] bannerEtiquetas = {
+            "NUEVA COLECCION",
+            "ENTRENA MEJOR",
+            "EQUIPO COMPLETO",
+            "OFERTAS ACTIVAS"
+    };
+    private final String[] bannerTitulos = {
+            "VELOCIDAD\nSIN LIMITES",
+            "FUERZA\nEN CADA JUGADA",
+            "TU PACK\nDEPORTIVO",
+            "PRECIO\nDE CAMPEON"
+    };
+    private final String[] bannerDescripciones = {
+            "Rendimiento extremo en cada desafio.",
+            "Prendas y accesorios listos para competir.",
+            "Balon, ropa y accesorios para tu rutina.",
+            "Aprovecha productos seleccionados en oferta."
+    };
+    private final int[] bannerImagenes = {
+            R.drawable.img_shoe_login,
+            R.drawable.banner_deportes_generado,
+            R.drawable.img_admin_consejos_balon,
+            R.drawable.producto_botin_destacado_negro_azul
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +131,20 @@ public class CatalogoActivity extends AppCompatActivity {
         panelModoCategorias = findViewById(R.id.panelModoCategorias);
         bannerInicio = findViewById(R.id.bannerInicioCatalogo);
         indicadoresBanner = findViewById(R.id.indicadoresBannerCatalogo);
+        txtBannerEtiqueta = findViewById(R.id.txtBannerEtiquetaCatalogo);
+        txtBannerTitulo = findViewById(R.id.txtBannerTituloCatalogo);
+        txtBannerDescripcion = findViewById(R.id.txtBannerDescripcionCatalogo);
+        imgBanner = findViewById(R.id.imgBannerCatalogo);
+        puntosBanner = new View[]{
+                findViewById(R.id.indicadorBannerUno),
+                findViewById(R.id.indicadorBannerDos),
+                findViewById(R.id.indicadorBannerTres),
+                findViewById(R.id.indicadorBannerCuatro)
+        };
 
         configurarRecycler();
         configurarEventos();
+        configurarBannerRotativo();
         cargarSaludoUsuario();
         actualizarBadgeCarrito();
         cargarProductos();
@@ -103,6 +156,13 @@ public class CatalogoActivity extends AppCompatActivity {
         super.onResume();
         cargarSaludoUsuario();
         actualizarBadgeCarrito();
+        iniciarBannerRotativo();
+    }
+
+    @Override
+    protected void onPause() {
+        detenerBannerRotativo();
+        super.onPause();
     }
 
     private void configurarRecycler() {
@@ -289,6 +349,54 @@ public class CatalogoActivity extends AppCompatActivity {
         scrollCatalogo.smoothScrollTo(0, 0);
     }
 
+    private void configurarBannerRotativo() {
+        bannerActual = 0;
+        mostrarBanner(bannerActual, false);
+    }
+
+    private void iniciarBannerRotativo() {
+        detenerBannerRotativo();
+        handlerBanner.postDelayed(rotadorBanner, 3500);
+    }
+
+    private void detenerBannerRotativo() {
+        handlerBanner.removeCallbacks(rotadorBanner);
+    }
+
+    private void avanzarBanner() {
+        if (bannerInicio.getVisibility() != View.VISIBLE) {
+            return;
+        }
+
+        bannerActual = (bannerActual + 1) % bannerTitulos.length;
+        mostrarBanner(bannerActual, true);
+    }
+
+    private void mostrarBanner(int posicion, boolean animar) {
+        txtBannerEtiqueta.setText(bannerEtiquetas[posicion]);
+        txtBannerTitulo.setText(bannerTitulos[posicion]);
+        txtBannerDescripcion.setText(bannerDescripciones[posicion]);
+        imgBanner.setImageResource(bannerImagenes[posicion]);
+        actualizarIndicadoresBanner(posicion);
+
+        if (animar) {
+            bannerInicio.setAlpha(0.45f);
+            bannerInicio.animate().alpha(1f).setDuration(260).start();
+        }
+    }
+
+    private void actualizarIndicadoresBanner(int activo) {
+        for (int i = 0; i < puntosBanner.length; i++) {
+            puntosBanner[i].setBackgroundColor(i == activo
+                    ? Color.rgb(0, 123, 255)
+                    : Color.rgb(42, 47, 56));
+
+            android.view.ViewGroup.LayoutParams params = puntosBanner[i].getLayoutParams();
+            params.width = dp(i == activo ? 18 : 6);
+            puntosBanner[i].setLayoutParams(params);
+        }
+    }
+
     private void actualizarBadgeCarrito() {
         int cantidad = CarritoMemoria.contarProductos();
 
@@ -299,5 +407,9 @@ public class CatalogoActivity extends AppCompatActivity {
 
         badgeCarritoCatalogo.setText(String.valueOf(cantidad));
         badgeCarritoCatalogo.setVisibility(View.VISIBLE);
+    }
+
+    private int dp(int valor) {
+        return (int) (valor * getResources().getDisplayMetrics().density);
     }
 }

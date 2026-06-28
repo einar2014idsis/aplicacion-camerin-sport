@@ -32,7 +32,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-public class ConfirmarPedidoActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class    ConfirmarPedidoActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private EditText edtCliente;
     private EditText edtTelefono;

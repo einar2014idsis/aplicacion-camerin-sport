@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="api_base_url" translatable="false">https://camerino-sports-api-einar.azurewebsites.net/api/</string>
+
+    <string-array name="api_base_urls" translatable="false">
+        <item>https://camerino-sports-api-einar.azurewebsites.net/api/</item>
+    </string-array>
+
+</resources>

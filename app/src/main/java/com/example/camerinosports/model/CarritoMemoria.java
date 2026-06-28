@@ -78,6 +78,27 @@ public class CarritoMemoria {
         return total;
     }
 
+    public static void actualizarProducto(Producto producto) {
+        if (producto == null) {
+            return;
+        }
+
+        for (int i = items.size() - 1; i >= 0; i--) {
+            CarritoItem item = items.get(i);
+            if (item.getProducto().getId() == producto.getId()) {
+                if (producto.getStock() <= 0) {
+                    items.remove(i);
+                    continue;
+                }
+
+                item.setProducto(producto);
+                if (item.getCantidad() > producto.getStock()) {
+                    item.setCantidad(producto.getStock());
+                }
+            }
+        }
+    }
+
     public static void vaciar() {
         items.clear();
     }

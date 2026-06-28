@@ -14,8 +14,8 @@ android {
         applicationId = "com.example.camerinosports"
         minSdk = 28
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 6
+        versionName = "1.5-delete-history"
     }
 
     buildTypes {

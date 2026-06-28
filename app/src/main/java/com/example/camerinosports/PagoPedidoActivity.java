@@ -6,6 +6,7 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -18,11 +19,9 @@ import com.example.camerinosports.model.CarritoItem;
 import com.example.camerinosports.model.CarritoMemoria;
 import com.example.camerinosports.model.Pedido;
 import com.example.camerinosports.model.PedidoDetalle;
-import com.example.camerinosports.model.Usuario;
 import com.example.camerinosports.model.UsuarioSesion;
 import com.example.camerinosports.viewmodel.PedidoViewModel;
 import com.example.camerinosports.viewmodel.ProductoViewModel;
-import com.example.camerinosports.viewmodel.UsuarioViewModel;
 import com.example.camerinosports.util.Validaciones;
 
 import java.text.SimpleDateFormat;
@@ -40,7 +39,6 @@ public class PagoPedidoActivity extends AppCompatActivity {
     public static final String EXTRA_LONGITUD = "longitud";
 
     private PedidoViewModel pedidoViewModel;
-    private UsuarioViewModel usuarioViewModel;
     private LinearLayout formYape;
     private LinearLayout formTarjeta;
     private EditText edtYapeTelefono;
@@ -58,14 +56,17 @@ public class PagoPedidoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_pago_pedido);
 
         pedidoViewModel = new PedidoViewModel(this);
-        usuarioViewModel = new UsuarioViewModel(this);
         enlazarVistas();
+        protegerCamposSensibles();
         configurarEventos();
         configurarFormatoTarjeta();
         cargarResumen();
+        seleccionarMetodo("Yape");
     }
 
     private void enlazarVistas() {
@@ -128,8 +129,8 @@ public class PagoPedidoActivity extends AppCompatActivity {
                 }
 
                 String digitos = editable.toString().replaceAll("\\D", "");
-                if (digitos.length() > 16) {
-                    digitos = digitos.substring(0, 16);
+                if (digitos.length() > 19) {
+                    digitos = digitos.substring(0, 19);
                 }
 
                 StringBuilder formato = new StringBuilder();
@@ -184,6 +185,22 @@ public class PagoPedidoActivity extends AppCompatActivity {
         total.setText("Total: S/ " + String.format("%.2f", CarritoMemoria.calcularTotal()));
     }
 
+    private void protegerCamposSensibles() {
+        EditText[] camposSensibles = {
+                edtYapeTelefono,
+                edtYapeCodigo,
+                edtNumeroTarjeta,
+                edtFechaTarjeta,
+                edtCvvTarjeta,
+                edtTitularTarjeta
+        };
+
+        for (EditText campo : camposSensibles) {
+            campo.setSaveEnabled(false);
+            campo.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
+        }
+    }
+
     private void seleccionarMetodo(String metodo) {
         metodoPago = metodo;
 
@@ -191,8 +208,8 @@ public class PagoPedidoActivity extends AppCompatActivity {
         formYape.setVisibility(esYape ? View.VISIBLE : View.GONE);
         formTarjeta.setVisibility(esYape ? View.GONE : View.VISIBLE);
 
-        txtCheckYape.setText(esYape ? "✓" : "");
-        txtCheckTarjeta.setText(esYape ? "" : "✓");
+        txtCheckYape.setText(esYape ? "OK" : "");
+        txtCheckTarjeta.setText(esYape ? "" : "OK");
         txtCheckYape.setBackgroundResource(esYape ? R.drawable.bg_btn_continuar_pedido : R.drawable.bg_estado_pendiente_redondo);
         txtCheckTarjeta.setBackgroundResource(esYape ? R.drawable.bg_estado_pendiente_redondo : R.drawable.bg_btn_continuar_pedido);
     }
@@ -228,7 +245,11 @@ public class PagoPedidoActivity extends AppCompatActivity {
                 ProductoViewModel productos = new ProductoViewModel(PagoPedidoActivity.this);
 
                 for (CarritoItem item : items) {
-                    if (productos.obtenerProductoPorId(item.getProducto().getId()) == null) {
+                    int cantidadSolicitada = item.getCantidad();
+                    com.example.camerinosports.model.Producto productoActual =
+                            productos.obtenerProductoPorId(item.getProducto().getId());
+
+                    if (productoActual == null) {
                         CarritoMemoria.eliminarProducto(item.getProducto().getId());
                         findViewById(R.id.btnConfirmarPagoPedido).setEnabled(true);
                         Toast.makeText(
@@ -243,9 +264,26 @@ public class PagoPedidoActivity extends AppCompatActivity {
                         finish();
                         return;
                     }
+
+                    if (productoActual.getStock() < cantidadSolicitada) {
+                        CarritoMemoria.actualizarProducto(productoActual);
+                        findViewById(R.id.btnConfirmarPagoPedido).setEnabled(true);
+                        Toast.makeText(
+                                PagoPedidoActivity.this,
+                                "Stock actualizado para " + productoActual.getNombre(),
+                                Toast.LENGTH_LONG
+                        ).show();
+                        Intent carrito = new Intent(PagoPedidoActivity.this, CarritoActivity.class);
+                        carrito.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(carrito);
+                        finish();
+                        return;
+                    }
+
+                    CarritoMemoria.actualizarProducto(productoActual);
                 }
 
-                registrarPedidoConfirmado();
+                registrarPedidoSimulado();
             }
 
             @Override
@@ -260,7 +298,7 @@ public class PagoPedidoActivity extends AppCompatActivity {
         });
     }
 
-    private void registrarPedidoConfirmado() {
+    private void registrarPedidoSimulado() {
         Pedido pedido = crearPedido();
 
         // el carrito solo se vacia cuando el servidor confirma que guardo el pedido
@@ -270,8 +308,9 @@ public class PagoPedidoActivity extends AppCompatActivity {
                 findViewById(R.id.btnConfirmarPagoPedido).setEnabled(true);
                 new ProductoViewModel(PagoPedidoActivity.this).sincronizarProductos();
                 CarritoMemoria.vaciar();
+                limpiarDatosSensibles();
                 Toast.makeText(PagoPedidoActivity.this,
-                        "pago y pedido registrados", Toast.LENGTH_SHORT).show();
+                        "Pago simulado aprobado", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(PagoPedidoActivity.this, SeguimientoPedidoActivity.class);
                 intent.putExtra("pedidoId", pedidoRegistrado.getId());
@@ -291,16 +330,17 @@ public class PagoPedidoActivity extends AppCompatActivity {
         // cada metodo de pago tiene campos y reglas diferentes
         if ("Yape".equals(metodoPago)) {
             if (!Validaciones.telefonoPeru(texto(edtYapeTelefono))) {
-                edtYapeTelefono.setError("Ingresa 9 dígitos y empieza en 9");
+                edtYapeTelefono.setError("Ingresa 9 digitos y empieza en 9");
                 edtYapeTelefono.requestFocus();
                 return false;
             }
 
             if (!texto(edtYapeCodigo).matches("\\d{6}")) {
-                edtYapeCodigo.setError("Ingresa el código de 6 dígitos");
+                edtYapeCodigo.setError("Ingresa 6 digitos para simular la confirmacion");
                 edtYapeCodigo.requestFocus();
                 return false;
             }
+
             return true;
         }
 
@@ -394,6 +434,21 @@ public class PagoPedidoActivity extends AppCompatActivity {
 
     private String texto(EditText editText) {
         return editText.getText().toString().trim();
+    }
+
+    private void limpiarDatosSensibles() {
+        edtYapeTelefono.setText("");
+        edtYapeCodigo.setText("");
+        edtNumeroTarjeta.setText("");
+        edtFechaTarjeta.setText("");
+        edtCvvTarjeta.setText("");
+        edtTitularTarjeta.setText("");
+    }
+
+    @Override
+    protected void onDestroy() {
+        limpiarDatosSensibles();
+        super.onDestroy();
     }
 
     private void ocultarTeclado() {

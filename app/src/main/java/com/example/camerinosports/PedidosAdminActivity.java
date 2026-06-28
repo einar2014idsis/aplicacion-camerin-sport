@@ -1,14 +1,19 @@
 package com.example.camerinosports;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ImageView;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -383,18 +388,170 @@ public class PedidosAdminActivity extends AppCompatActivity {
     }
 
     private void mostrarDetalle(Pedido pedido) {
-ArrayList<PedidoDetalle> detalles = pedido.getDetalles() == null
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        LinearLayout modal = new LinearLayout(this);
+        modal.setOrientation(LinearLayout.VERTICAL);
+        modal.setBackgroundResource(R.drawable.fondo_resumen_pedido);
+        modal.setPadding(dp(20), dp(20), dp(20), dp(20));
+
+        LinearLayout cabecera = new LinearLayout(this);
+        cabecera.setOrientation(LinearLayout.HORIZONTAL);
+        cabecera.setGravity(Gravity.CENTER_VERTICAL);
+
+        TextView tituloModal = crearTexto("Contenido para enviar", 22, "#FFFFFF", true);
+        cabecera.addView(tituloModal, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+
+        TextView cerrarIcono = crearTexto("X", 22, "#FFFFFF", true);
+        cerrarIcono.setGravity(Gravity.CENTER);
+        cerrarIcono.setBackgroundResource(R.drawable.bg_card_admin_moderno);
+        cabecera.addView(cerrarIcono, new LinearLayout.LayoutParams(dp(54), dp(54)));
+        modal.addView(cabecera);
+
+        View separador = new View(this);
+        separador.setBackgroundColor(Color.parseColor("#29445C"));
+        LinearLayout.LayoutParams separadorParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                dp(1)
+        );
+        separadorParams.setMargins(0, dp(18), 0, dp(14));
+        modal.addView(separador, separadorParams);
+
+        ScrollView scrollView = new ScrollView(this);
+        LinearLayout contenido = new LinearLayout(this);
+        contenido.setOrientation(LinearLayout.VERTICAL);
+        scrollView.addView(contenido);
+        modal.addView(scrollView, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                0,
+                1
+        ));
+
+        ArrayList<PedidoDetalle> detalles = pedido.getDetalles() == null
                 ? new ArrayList<>()
                 : pedido.getDetalles();
-        String mensaje = "cliente: " + pedido.getCliente() + "\ntotal: S/ " + String.format("%.2f", pedido.getTotal()) + "\n\n";
-        int i;
 
-        for (i = 0; i < detalles.size(); i++) {
-            PedidoDetalle detalle = detalles.get(i);
-            mensaje += detalle.getNombreProducto() + " x" + detalle.getCantidad() + " S/ " + String.format("%.2f", detalle.getSubtotal()) + "\n";
+        if (detalles.isEmpty()) {
+            contenido.addView(crearTexto("No hay productos registrados en este pedido", 12, "#AFC0D3", false));
+        } else {
+            for (int i = 0; i < detalles.size(); i++) {
+                contenido.addView(crearFilaDetalle(detalles.get(i)));
+            }
         }
 
-        new AlertDialog.Builder(this).setTitle("detalle pedido").setMessage(mensaje).setPositiveButton("ok", null).show();
+        LinearLayout totalBox = new LinearLayout(this);
+        totalBox.setOrientation(LinearLayout.HORIZONTAL);
+        totalBox.setGravity(Gravity.CENTER_VERTICAL);
+        totalBox.setBackgroundResource(R.drawable.fondo_item_pedido);
+        totalBox.setPadding(dp(16), dp(12), dp(16), dp(12));
+        LinearLayout.LayoutParams totalParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        totalParams.setMargins(0, dp(16), 0, dp(18));
+
+        TextView etiquetaTotal = crearTexto("Total del pedido", 17, "#FFFFFF", true);
+        totalBox.addView(etiquetaTotal, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+
+        TextView total = crearTexto("S/ " + String.format("%.2f", pedido.getTotal()), 22, "#1AB7FF", true);
+        total.setGravity(Gravity.END);
+        totalBox.addView(total);
+        modal.addView(totalBox, totalParams);
+
+        TextView cerrar = crearBotonDialog("Cerrar", false);
+        modal.addView(cerrar, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                dp(58)
+        ));
+
+        cerrarIcono.setOnClickListener(view -> dialog.dismiss());
+        cerrar.setOnClickListener(view -> dialog.dismiss());
+
+        dialog.setContentView(modal);
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            window.setDimAmount(0.78f);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        }
+
+        dialog.setOnShowListener(dialogInterface -> {
+            Window dialogWindow = dialog.getWindow();
+            if (dialogWindow != null) {
+                int ancho = (int) (getResources().getDisplayMetrics().widthPixels * 0.88f);
+                int altoMaximo = (int) (getResources().getDisplayMetrics().heightPixels * 0.82f);
+                dialogWindow.setLayout(ancho, altoMaximo);
+            }
+        });
+        dialog.show();
+    }
+
+    private View crearFilaDetalle(PedidoDetalle detalle) {
+        LinearLayout fila = new LinearLayout(this);
+        fila.setOrientation(LinearLayout.HORIZONTAL);
+        fila.setGravity(Gravity.CENTER_VERTICAL);
+        fila.setBackgroundResource(R.drawable.fondo_resumen_pedido);
+        fila.setPadding(dp(12), dp(10), dp(12), dp(10));
+        LinearLayout.LayoutParams filaParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        filaParams.setMargins(0, 0, 0, dp(10));
+        fila.setLayoutParams(filaParams);
+
+        fila.addView(crearVistaImagen(detalle.getImagenProducto()), new LinearLayout.LayoutParams(dp(72), dp(72)));
+
+        LinearLayout textos = new LinearLayout(this);
+        textos.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams textosParams = new LinearLayout.LayoutParams(
+                0,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                1
+        );
+        textosParams.setMargins(dp(12), 0, 0, 0);
+
+        TextView nombre = crearTexto(textoSeguro(detalle.getNombreProducto(), "Producto"), 14, "#FFFFFF", true);
+        TextView cantidad = crearTexto(
+                "Cantidad: " + detalle.getCantidad() +
+                        " | Precio: S/ " + String.format("%.2f", detalle.getPrecio()),
+                12,
+                "#AFC0D3",
+                false
+        );
+
+        textos.addView(nombre);
+        textos.addView(cantidad);
+        fila.addView(textos, textosParams);
+
+        LinearLayout bloqueSubtotal = new LinearLayout(this);
+        bloqueSubtotal.setOrientation(LinearLayout.VERTICAL);
+        bloqueSubtotal.setGravity(Gravity.END);
+        TextView etiquetaSubtotal = crearTexto("Subtotal", 12, "#AFC0D3", false);
+        etiquetaSubtotal.setGravity(Gravity.END);
+        TextView subtotal = crearTexto(
+                "S/ " + String.format("%.2f", detalle.getSubtotal()),
+                16,
+                "#1AB7FF",
+                true
+        );
+        subtotal.setGravity(Gravity.END);
+        bloqueSubtotal.addView(etiquetaSubtotal);
+        bloqueSubtotal.addView(subtotal);
+        fila.addView(bloqueSubtotal, new LinearLayout.LayoutParams(dp(104), ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        return fila;
+    }
+
+    private TextView crearBotonDialog(String texto, boolean principal) {
+        TextView boton = crearTexto(texto, 15, "#FFFFFF", true);
+        boton.setGravity(Gravity.CENTER);
+        boton.setBackgroundResource(principal ? R.drawable.bg_btn_continuar_pedido : R.drawable.bg_card_admin_moderno);
+        return boton;
+    }
+
+    private String textoSeguro(String texto, String valorDefecto) {
+        return texto == null || texto.trim().isEmpty() ? valorDefecto : texto.trim();
     }
 
     private void cambiarEstado(Pedido pedido) {

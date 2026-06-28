@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,7 +77,6 @@ public class MapaEntregaActivity extends AppCompatActivity implements OnMapReady
     public void onMapReady(@NonNull GoogleMap map) {
         googleMap = map;
         googleMap.getUiSettings().setZoomControlsEnabled(true);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(4.710989, -74.072092), 5f));
 
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -92,6 +92,14 @@ public class MapaEntregaActivity extends AppCompatActivity implements OnMapReady
         findViewById(R.id.btnUsarMiUbicacion).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!ubicacionActiva()) {
+                    Toast.makeText(MapaEntregaActivity.this,
+                            "Activa la ubicacion del telefono o toca el mapa para elegir",
+                            Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    return;
+                }
+
                 obtenerUbicacionActual();
             }
         });
@@ -141,7 +149,6 @@ public class MapaEntregaActivity extends AppCompatActivity implements OnMapReady
         txtUbicacionMapa.setText("Buscando tu ubicacion actual...");
 
         if (!ubicacionActiva()) {
-            Toast.makeText(this, "activa la ubicacion GPS del telefono", Toast.LENGTH_LONG).show();
             txtUbicacionMapa.setText("GPS desactivado. Activa la ubicacion o toca el mapa.");
             return;
         }
@@ -205,6 +212,10 @@ public class MapaEntregaActivity extends AppCompatActivity implements OnMapReady
     }
 
     private void seleccionarUbicacion(LatLng latLng) {
+        if (googleMap == null) {
+            return;
+        }
+
         ubicacionSeleccionada = latLng;
 
         if (marcador != null) {
@@ -236,6 +247,15 @@ public class MapaEntregaActivity extends AppCompatActivity implements OnMapReady
         }
 
         super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (googleMap != null && tienePermisoUbicacion() && ubicacionActiva() && ubicacionSeleccionada == null) {
+            obtenerUbicacionActual();
+        }
     }
 
     @Override
